@@ -183,6 +183,7 @@ UPROGS=\
 	_zombie\
 	_sleep\
 	_find\
+	_xargs\
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)
