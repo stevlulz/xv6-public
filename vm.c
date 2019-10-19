@@ -124,8 +124,8 @@ setupkvm(void)
   if((pgdir = (pde_t*)kalloc()) == 0)
     return 0;
   memset(pgdir, 0, PGSIZE);
-  if (P2V(PHYSTOP) > (void*)DEVSPACE)
-    panic("PHYSTOP too high");
+ // if (P2V(PHYSTOP) > (void*)DEVSPACE)
+ //   panic("PHYSTOP too high");
   for(k = kmap; k < &kmap[NELEM(kmap)]; k++)
     if(mappages(pgdir, k->virt, k->phys_end - k->phys_start,
                 (uint)k->phys_start, k->perm) < 0) {
@@ -385,6 +385,18 @@ copyout(pde_t *pgdir, uint va, void *p, uint len)
   return 0;
 }
 
+
+int kmemeread(char* dst,uint off,int n){
+
+   int rest = n-PGROUNDUP(off);
+   uint 
+   pte_t curr = walkpgdir(myproc()->pgdir,off,0);
+
+
+
+
+
+}
 //PAGEBREAK!
 // Blank page.
 //PAGEBREAK!

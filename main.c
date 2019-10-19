@@ -17,7 +17,7 @@ extern char end[]; // first address after kernel loaded from ELF file
 int
 main(void)
 {
-  kinit1(end, P2V(4*1024*1024)); // phys page allocator
+  kinit1(end, P2V(4*1024*1024)); // phys page allocator 0x801154a8,0x80400000
   kvmalloc();      // kernel page table
   mpinit();        // detect other processors
   lapicinit();     // interrupt controller
@@ -25,6 +25,7 @@ main(void)
   picinit();       // disable pic
   ioapicinit();    // another interrupt controller
   consoleinit();   // console hardware
+  drvmeminit();
   uartinit();      // serial port
   pinit();         // process table
   tvinit();        // trap vectors

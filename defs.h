@@ -10,6 +10,10 @@ struct sleeplock;
 struct stat;
 struct superblock;
 
+//drvmem.c
+void drvmeminit(void);
+
+
 // bio.c
 void            binit(void);
 struct buf*     bread(uint, uint);
@@ -33,6 +37,10 @@ void            fileinit(void);
 int             fileread(struct file*, char*, int n);
 int             filestat(struct file*, struct stat*);
 int             filewrite(struct file*, char*, int n);
+/*
+ * Added TP1 lseek?
+ */
+int fileseek(struct file*,unsigned int off,int whence);
 
 // fs.c
 void            readsb(int dev, struct superblock *sb);
@@ -185,6 +193,7 @@ void            switchuvm(struct proc*);
 void            switchkvm(void);
 int             copyout(pde_t*, uint, void*, uint);
 void            clearpteu(pde_t *pgdir, char *uva);
+int kmemeread(char* dst,uint off,int n);
 
 // number of elements in fixed-size array
 #define NELEM(x) (sizeof(x)/sizeof((x)[0]))
